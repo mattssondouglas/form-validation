@@ -4,7 +4,19 @@ const email = document.getElementById("email");
 const password = document.getElementById("password");
 const password2 = document.getElementById("password2");
 
+// Input error message
+
+const showError = (input, message) => {
+  const formControl = input.parentElement;
+  formControl.className = "form-control error";
+};
+
 form.addEventListener("submit", function(e) {
   e.preventDefault();
-  console.log("submit");
+
+  if (username.value === "") {
+    showError(username, "Username is required");
+  } else {
+    showSuccess(username);
+  }
 });

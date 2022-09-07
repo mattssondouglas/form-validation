@@ -9,8 +9,27 @@ const password2 = document.getElementById("password2");
 const showError = (input, message) => {
   const formControl = input.parentElement;
   formControl.className = "form-control error";
+  const small = formControl.querySelector("small");
+  small.innerText = message;
 };
 
+// Show Success
+const showSuccess = input => {
+  const formControl = input.parentElement;
+  formControl.className = "form-control success";
+};
+
+// Check Email
+
+const isValidEmail = email => {
+  return String(email)
+    .toLowerCase()
+    .match(
+      /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+    );
+};
+
+// Event listeners
 form.addEventListener("submit", function(e) {
   e.preventDefault();
 
@@ -18,5 +37,23 @@ form.addEventListener("submit", function(e) {
     showError(username, "Username is required");
   } else {
     showSuccess(username);
+  }
+
+  if (email.value === "") {
+    showError(email, "Email is required");
+  } else {
+    showSuccess(email);
+  }
+
+  if (password.value === "") {
+    showError(password, "Password is required");
+  } else {
+    showSuccess(password);
+  }
+
+  if (password2.value === "") {
+    showError(password2, "Confirmation is required");
+  } else {
+    showSuccess(password2);
   }
 });
